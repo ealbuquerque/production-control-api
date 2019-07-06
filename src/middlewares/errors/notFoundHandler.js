@@ -1,7 +1,7 @@
 
 import HttpStatus from 'http-status-codes';
 
-import genericErrorHandler from './genericErrorHandler';
+import genericErrorHandler from './genericHandler';
 
 /**
  * NOT_FOUND(404) middleware
@@ -10,8 +10,12 @@ import genericErrorHandler from './genericErrorHandler';
  * @param {object} res
  */
 export default (req, res) => {
+  const code = HttpStatus.NOT_FOUND;
   const error = {
-    code: HttpStatus.NOT_FOUND,
+    code,
+    message: HttpStatus.getStatusText(code),
+    messageToken: 'general.notFound',
   };
+
   genericErrorHandler(error, req, res);
 };
