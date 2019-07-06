@@ -3,6 +3,7 @@
   "author": "Ezequias Albuquerque <ezequias.albuquerque@outlook.com>",
   "version": "0.1.0",
   "scripts": {
+    "init-db": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "lint": "eslint .",
     "lint-fix": "eslint ./src --fix",
     "production": "pm2 start src/app.js --interpreter babel-node --name api-data",
