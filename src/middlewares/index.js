@@ -1,11 +1,13 @@
 import cors from './cors';
-import genericErrorHandler from './errors/genericErrorHandler';
-import notFoundErrorHandler from './errors/notFoundErrorHandler';
+import database from './database';
+import errors from './errors';
 import requestLogger from './requestLogger';
+import schemaValidation from './schemaValidation';
 
 export {
   cors,
-  genericErrorHandler,
-  notFoundErrorHandler,
+  database,
+  errors,
   requestLogger,
+  schemaValidation,
 };
