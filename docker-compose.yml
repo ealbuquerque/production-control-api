@@ -3,6 +3,7 @@ version: '3'
 services:
   database:
     image: postgres
+    restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=Abc_1234
