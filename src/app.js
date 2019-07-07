@@ -8,7 +8,7 @@ import {
 
 import routes from './routes';
 
-if (process.env.NODE_ENV === 'development') {
+if (!process.env.NODE_ENV !== 'production') {
   // REQUEST LOGGER
   app.use(requestLogger);
 }
