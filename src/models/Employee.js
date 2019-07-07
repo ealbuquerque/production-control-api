@@ -11,10 +11,6 @@ const Employee = db.define('Employee', {
     primaryKey: true,
     type: Sequelize.INTEGER,
   },
-  name: {
-    allowNull: false,
-    type: Sequelize.STRING(100),
-  },
   idWorkPeriod: {
     field: 'id_work_period',
     allowNull: false,
@@ -23,6 +19,10 @@ const Employee = db.define('Employee', {
       model: WorkPeriod,
       key: 'id',
     },
+  },
+  name: {
+    allowNull: false,
+    type: Sequelize.STRING(100),
   },
 }, {
   freezeTableName: true,

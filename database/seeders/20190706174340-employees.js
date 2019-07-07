@@ -1,10 +1,10 @@
-const rawMaterialsJson = require('./data/employees.json');
+const employeesJson = require('./data/employees.json');
 
 module.exports = {
   up: queryInterface => queryInterface
     .bulkInsert(
       'employees',
-      rawMaterialsJson,
+      employeesJson,
       {},
     ),
   down: queryInterface => queryInterface
