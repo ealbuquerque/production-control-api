@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/named
-import { RawMaterial } from '../models';
+import RawMaterial from '../models/RawMaterial';
 
 const attributes = [
   'id',
@@ -23,8 +22,8 @@ const findById = id => RawMaterial.findByPk(id, {
 
 const create = body => RawMaterial.create(body);
 
-const update = (id, rawMaterial) => RawMaterial.update(
-  rawMaterial,
+const update = (id, body) => RawMaterial.update(
+  body,
   {
     where: {
       id,
