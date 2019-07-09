@@ -1,6 +1,7 @@
 import employee from './employee';
 import product from './product';
 import rawMaterial from './rawMaterial';
+import workPeriod from './workPeriod';
 
 export default {
   '/employees': employee,
@@ -9,4 +10,6 @@ export default {
   '/products/:id': product,
   '/raw-materials': rawMaterial,
   '/raw-materials/:id': rawMaterial,
+  '/work-period': workPeriod,
+  '/work-period/:id': workPeriod,
 };
