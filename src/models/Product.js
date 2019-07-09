@@ -4,6 +4,27 @@ import Employee from './Employee';
 
 import db from '../config/database';
 
+/**
+ * @swagger
+ * definitions:
+ *  Product:
+ *    type: object
+ *    required:
+ *      - id
+ *      - idEmployee
+ *      - name
+ *    properties:
+ *      id:
+ *        description: Identificador único
+ *        type: integer
+ *      idEmployee:
+ *        description: Id do relacionamento com Employee
+ *        type: integer
+ *      name:
+ *        description: Nome do produto final
+ *        maxLength: 100
+ *        type: string
+ */
 const Product = db.define('Product', {
   id: {
     allowNull: false,
