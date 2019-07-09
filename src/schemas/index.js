@@ -1,9 +1,9 @@
-import employees from './employees';
+import employee from './employee';
 import rawMaterial from './rawMaterial';
 
 export default {
-  '/employees': employees,
-  '/employees/:id': employees,
+  '/employees': employee,
+  '/employees/:id': employee,
   '/raw-materials': rawMaterial,
   '/raw-materials/:id': rawMaterial,
 };

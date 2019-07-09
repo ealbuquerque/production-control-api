@@ -12,13 +12,13 @@ const Employee = db.define('Employee', {
     type: Sequelize.INTEGER,
   },
   idWorkPeriod: {
-    field: 'id_work_period',
     allowNull: false,
-    type: Sequelize.INTEGER,
+    field: 'id_work_period',
     references: {
       model: WorkPeriod,
       key: 'id',
     },
+    type: Sequelize.INTEGER,
   },
   name: {
     allowNull: false,
@@ -29,7 +29,7 @@ const Employee = db.define('Employee', {
   tableName: 'employees',
 });
 
-Employee.belongsTo(WorkPeriod, {
+Employee.WorkPeriod = Employee.belongsTo(WorkPeriod, {
   as: 'workPeriod',
   foreignKey: {
     field: 'id_work_period',

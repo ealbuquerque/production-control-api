@@ -1,10 +1,12 @@
 import RawMaterial from '../models/RawMaterial';
 
-const attributes = [
-  'id',
-  'name',
-  'quantity',
-];
+const baseQuery = {
+  attributes: [
+    'id',
+    'name',
+    'quantity',
+  ],
+};
 
 const destroy = id => RawMaterial.destroy({
   where: {
@@ -12,13 +14,9 @@ const destroy = id => RawMaterial.destroy({
   },
 });
 
-const findAll = () => RawMaterial.findAll({
-  attributes,
-});
+const findAll = () => RawMaterial.findAll(baseQuery);
 
-const findById = id => RawMaterial.findByPk(id, {
-  attributes,
-});
+const findById = id => RawMaterial.findByPk(id, baseQuery);
 
 const create = body => RawMaterial.create(body);
 
