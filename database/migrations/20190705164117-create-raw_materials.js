@@ -5,6 +5,7 @@ module.exports = {
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
+      unique: true,
     },
     name: {
       allowNull: false,
