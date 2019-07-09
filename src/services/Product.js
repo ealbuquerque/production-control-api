@@ -63,11 +63,17 @@ const update = (id, {
     },
   )
   .then(() => Product.findByPk(id))
-  .then(dbProduct => dbProduct.setRawMaterials(rawMaterials, {
-    through: {
-      started: false,
-    },
-  }));
+  .then((dbProduct) => {
+    if (dbProduct === null) {
+      return false;
+    }
+
+    return dbProduct.setRawMaterials(rawMaterials, {
+      through: {
+        started: false,
+      },
+    });
+  });
 
 export default {
   create,
