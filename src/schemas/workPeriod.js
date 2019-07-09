@@ -1,0 +1,10 @@
+import Joi from 'joi';
+
+export default Joi
+  .object()
+  .keys({
+    value: Joi
+      .string()
+      .max(2)
+      .required(),
+  });

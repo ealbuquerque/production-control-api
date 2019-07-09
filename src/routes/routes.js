@@ -61,4 +61,35 @@ export default [
     method: 'put',
     path: '/employees/:id',
   },
+  // WORK PERIODS
+  {
+    action: 'create',
+    controller: 'workPeriods',
+    method: 'post',
+    path: '/work-periods',
+  },
+  {
+    action: 'destroy',
+    controller: 'workPeriods',
+    method: 'delete',
+    path: '/work-periods/:id',
+  },
+  {
+    action: 'findAll',
+    controller: 'workPeriods',
+    method: 'get',
+    path: '/work-periods',
+  },
+  {
+    action: 'findById',
+    controller: 'workPeriods',
+    method: 'get',
+    path: '/work-periods/:id',
+  },
+  {
+    action: 'update',
+    controller: 'workPeriods',
+    method: 'put',
+    path: '/work-periods/:id',
+  },
 ];
