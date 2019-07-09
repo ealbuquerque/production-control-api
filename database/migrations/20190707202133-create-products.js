@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, DataTypes) => queryInterface.createTable('employees', {
+  up: (queryInterface, DataTypes) => queryInterface.createTable('products', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -7,11 +7,11 @@ module.exports = {
       type: DataTypes.INTEGER,
       unique: true,
     },
-    id_work_period: {
+    id_employee: {
       allowNull: false,
       type: DataTypes.INTEGER,
       references: {
-        model: 'work_periods',
+        model: 'employees',
         key: 'id',
       },
     },
@@ -20,5 +20,5 @@ module.exports = {
       type: DataTypes.STRING(100),
     },
   }),
-  down: queryInterface => queryInterface.dropTable('employees'),
+  down: queryInterface => queryInterface.dropTable('products'),
 };

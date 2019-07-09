@@ -3,7 +3,8 @@
   "author": "Ezequias Albuquerque <ezequias.albuquerque@outlook.com>",
   "version": "0.1.0",
   "scripts": {
-    "init-db": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
+    "db-init": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
+    "db-reset": "sequelize db:drop && yarn db-init",
     "lint": "eslint .",
     "lint-fix": "eslint ./src --fix",
     "migrate": "sequelize db:migrate",

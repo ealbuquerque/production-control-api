@@ -1,15 +1,15 @@
-const employeesJson = require('./data/employees.json');
+const productsJson = require('./data/products.json');
 
 module.exports = {
   up: queryInterface => queryInterface
     .bulkInsert(
-      'employees',
-      employeesJson,
+      'products',
+      productsJson,
       {},
     ),
   down: queryInterface => queryInterface
     .bulkDelete(
-      'employees',
+      'products',
       null,
       {},
     ),

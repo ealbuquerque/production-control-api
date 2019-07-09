@@ -1,24 +1,24 @@
 import Sequelize from 'sequelize';
 
-import WorkPeriod from './WorkPeriod';
+import Employee from './Employee';
 
 import db from '../config/database';
 
-const Employee = db.define('Employee', {
+const Product = db.define('Product', {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: Sequelize.INTEGER,
   },
-  idWorkPeriod: {
+  idEmployee: {
+    field: 'id_employee',
     allowNull: false,
-    field: 'id_work_period',
+    type: Sequelize.INTEGER,
     references: {
-      model: WorkPeriod,
+      model: Employee,
       key: 'id',
     },
-    type: Sequelize.INTEGER,
   },
   name: {
     allowNull: false,
@@ -26,15 +26,15 @@ const Employee = db.define('Employee', {
   },
 }, {
   freezeTableName: true,
-  tableName: 'employees',
+  tableName: 'products',
 });
 
-Employee.WorkPeriod = Employee.belongsTo(WorkPeriod, {
-  as: 'workPeriod',
+Product.Employee = Product.belongsTo(Employee, {
+  as: 'employee',
   foreignKey: {
-    field: 'id_work_period',
+    field: 'id_employee',
   },
   targetKey: 'id',
 });
 
-export default Employee;
+export default Product;
