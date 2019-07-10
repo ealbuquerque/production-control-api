@@ -40,7 +40,7 @@ NODE_ENV='development'
 
 ### 3º Base de dados
 
-Caso não tenha o Postgres instalado na sua máquina, é possível utilizar o [docker](https://www.docker.com/) para para subir o serviço atráves deste [docker-compose](docker-compose.yml).
+Caso não tenha o Postgres instalado na sua máquina, é possível utilizar o [docker](https://www.docker.com/) para para subir o serviço atráves deste [docker-compose](docker-compose.db.yml).
 
 ```
 # subir serviço
@@ -74,12 +74,26 @@ npm run db-init
 
 ### 6º Passo - Iniciar a aplicação
 
+#### Manualmente
+
 ```bash
 yarn start
 
 # or
 
 npm run start
+```
+
+#### Docker
+
+Este [docker-compose](docker-compose.yml) vai gerar a imagem da api (caso não exista) e subir os serviços da base de dados na porta `5432` e da api na porta `5000`.
+
+```
+# subir serviço
+docker-compose up -d
+
+# parar serviço
+docker-compose down
 ```
 
 ## Testes
