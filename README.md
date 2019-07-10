@@ -44,10 +44,10 @@ Caso não tenha o Postgres instalado na sua máquina, é possível utilizar o [d
 
 ```
 # subir serviço
-docker-compose up -V -d
+docker-compose -f docker-compose.db.yml up -V -d
 
 # parar serviço
-docker-compose down -v
+docker-compose -f docker-compose.db.yml down -v
 ```
 
 ### 4º Passo - Baixar dependências
