@@ -71,7 +71,7 @@ describe('Testing the raw material endpoints:', () => {
       .send(rawMaterial)
       .end((err, res) => {
         expect(res.status).to.equal(HttpStatus.CREATED);
-        expect(res.body.data).to.include({});
+        expect(res.body).to.include({});
         done();
       });
   });
@@ -100,10 +100,19 @@ describe('Testing the raw material endpoints:', () => {
     chai.request(SERVER_URL)
       .put(`${ENDPOINT}/${id}`)
       .send(rawMaterial)
-      .end((err, res) => {
-        expect(res.status).to.equal(HttpStatus.OK);
-        expect(res.body.data).to.include({});
-        done();
+      .end((err1, res1) => {
+        chai.request(SERVER_URL)
+          .get(`${ENDPOINT}/${id}`)
+          .end((err2, res2) => {
+            expect(res1.status).to.equal(HttpStatus.OK);
+            expect(res1.body).to.include({});
+
+            expect(res2.status).to.equal(HttpStatus.OK);
+            expect(res2.body.id).to.equal(id);
+            expect(res2.body.name).to.equal(rawMaterial.name);
+            expect(res2.body.quantity).to.equal(rawMaterial.quantity);
+            done();
+          });
       });
   });
 
@@ -129,7 +138,7 @@ describe('Testing the raw material endpoints:', () => {
       .delete(`${ENDPOINT}/${id}`)
       .end((err, res) => {
         expect(res.status).to.equal(200);
-        expect(res.body.data).to.include({});
+        expect(res.body).to.include({});
         done();
       });
   });

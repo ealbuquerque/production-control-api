@@ -26,6 +26,8 @@ describe('Testing the employees endpoints:', () => {
           expect(first).to.have.property('id');
           expect(first).to.have.property('name');
           expect(first).to.have.property('workPeriod');
+          expect(first.workPeriod).to.be.an('object');
+          expect(first.workPeriod).to.have.property('value');
         }
 
         done();
@@ -44,6 +46,9 @@ describe('Testing the employees endpoints:', () => {
         expect(res.body).to.have.property('id');
         expect(res.body).to.have.property('name');
         expect(res.body).to.have.property('workPeriod');
+        expect(res.body.workPeriod).to.be.an('object');
+        expect(res.body.workPeriod).to.have.property('id');
+        expect(res.body.workPeriod).to.have.property('value');
 
         done();
       });
@@ -71,7 +76,7 @@ describe('Testing the employees endpoints:', () => {
       .send(employee)
       .end((err, res) => {
         expect(res.status).to.equal(HttpStatus.CREATED);
-        expect(res.body.data).to.include({});
+        expect(res.body).to.include({});
         done();
       });
   });
@@ -98,10 +103,20 @@ describe('Testing the employees endpoints:', () => {
     chai.request(SERVER_URL)
       .put(`${ENDPOINT}/${id}`)
       .send(employee)
-      .end((err, res) => {
-        expect(res.status).to.equal(HttpStatus.OK);
-        expect(res.body.data).to.include({});
-        done();
+      .end((err1, res1) => {
+        chai.request(SERVER_URL)
+          .get(`${ENDPOINT}/${id}`)
+          .end((err2, res2) => {
+            expect(res1.status).to.equal(HttpStatus.OK);
+            expect(res1.body).to.include({});
+
+            expect(res2.status).to.equal(HttpStatus.OK);
+            expect(res2.body.id).to.equal(id);
+            expect(res2.body.name).to.equal(employee.name);
+            expect(res2.body.workPeriod).be.a('object');
+            expect(res2.body.workPeriod.id).to.equal(employee.idWorkPeriod);
+            done();
+          });
       });
   });
 
@@ -127,7 +142,7 @@ describe('Testing the employees endpoints:', () => {
       .delete(`${ENDPOINT}/${id}`)
       .end((err, res) => {
         expect(res.status).to.equal(200);
-        expect(res.body.data).to.include({});
+        expect(res.body).to.include({});
         done();
       });
   });

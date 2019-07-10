@@ -34,6 +34,7 @@ const port = app.get('port');
 app.listen(port, host, () => {
   // eslint-disable-next-line no-console
   console.log(`\nServer running at: http://${host}:${port}`);
+  // eslint-disable-next-line no-console
   console.log(`You can access the api documentation at: http://${host}:${port}/docs\n`);
 });
 

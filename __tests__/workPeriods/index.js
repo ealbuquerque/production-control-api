@@ -59,26 +59,26 @@ describe('Testing the work periods endpoints:', () => {
   });
 
   it('It should create a work period', (done) => {
-    const rawMaterial = {
+    const workPeriod = {
       value: '1h',
     };
 
     chai.request(SERVER_URL)
       .post(ENDPOINT)
-      .send(rawMaterial)
+      .send(workPeriod)
       .end((err, res) => {
         expect(res.status).to.equal(HttpStatus.CREATED);
-        expect(res.body.data).to.include({});
+        expect(res.body).to.include({});
         done();
       });
   });
 
   it('It should not create a work period with incomplete parameters', (done) => {
-    const rawMaterial = {};
+    const workPeriod = {};
 
     chai.request(SERVER_URL)
       .post(ENDPOINT)
-      .send(rawMaterial)
+      .send(workPeriod)
       .end((err, res) => {
         expect(res.status).to.equal(HttpStatus.UNPROCESSABLE_ENTITY);
         done();
@@ -87,29 +87,37 @@ describe('Testing the work periods endpoints:', () => {
 
   it('It should update a work period', (done) => {
     const id = 1;
-    const rawMaterial = {
+    const workPeriod = {
       value: '1h',
     };
 
     chai.request(SERVER_URL)
       .put(`${ENDPOINT}/${id}`)
-      .send(rawMaterial)
-      .end((err, res) => {
-        expect(res.status).to.equal(HttpStatus.OK);
-        expect(res.body.data).to.include({});
-        done();
+      .send(workPeriod)
+      .end((err1, res1) => {
+        chai.request(SERVER_URL)
+          .get(`${ENDPOINT}/${id}`)
+          .end((err2, res2) => {
+            expect(res1.status).to.equal(HttpStatus.OK);
+            expect(res1.body).to.include({});
+
+            expect(res2.status).to.equal(HttpStatus.OK);
+            expect(res2.body.id).to.equal(id);
+            expect(res2.body.value).to.equal(workPeriod.value);
+            done();
+          });
       });
   });
 
   it('It should update a work period with invalid id', (done) => {
     const id = 999999999;
-    const rawMaterial = {
+    const workPeriod = {
       value: '1h',
     };
 
     chai.request(SERVER_URL)
       .put(`${ENDPOINT}/${id}`)
-      .send(rawMaterial)
+      .send(workPeriod)
       .end((err, res) => {
         expect(res.status).to.equal(HttpStatus.NOT_FOUND);
         done();
@@ -122,7 +130,7 @@ describe('Testing the work periods endpoints:', () => {
       .delete(`${ENDPOINT}/${id}`)
       .end((err, res) => {
         expect(res.status).to.equal(200);
-        expect(res.body.data).to.include({});
+        expect(res.body).to.include({});
         done();
       });
   });
