@@ -31,7 +31,7 @@ describe('Testing the work periods endpoints:', () => {
       });
   });
 
-  it('It should return a work periods', (done) => {
+  it('It should return a work period', (done) => {
     const id = 1;
     request(SERVER_URL)
       .get(`${ENDPOINT}/${id}`)
@@ -47,7 +47,7 @@ describe('Testing the work periods endpoints:', () => {
       });
   });
 
-  it('It should not get a work periods with invalid id', (done) => {
+  it('It should not get a work period with invalid id', (done) => {
     const id = 999999999;
     chai.request(SERVER_URL)
       .get(`${ENDPOINT}/${id}`)
@@ -58,7 +58,7 @@ describe('Testing the work periods endpoints:', () => {
       });
   });
 
-  it('It should create a work periods', (done) => {
+  it('It should create a work period', (done) => {
     const rawMaterial = {
       value: '1h',
     };
@@ -73,7 +73,7 @@ describe('Testing the work periods endpoints:', () => {
       });
   });
 
-  it('It should not create a work periods with incomplete parameters', (done) => {
+  it('It should not create a work period with incomplete parameters', (done) => {
     const rawMaterial = {};
 
     chai.request(SERVER_URL)
@@ -85,7 +85,7 @@ describe('Testing the work periods endpoints:', () => {
       });
   });
 
-  it('It should update a work periods', (done) => {
+  it('It should update a work period', (done) => {
     const id = 1;
     const rawMaterial = {
       value: '1h',
@@ -101,7 +101,7 @@ describe('Testing the work periods endpoints:', () => {
       });
   });
 
-  it('It should update a work periods with invalid id', (done) => {
+  it('It should update a work period with invalid id', (done) => {
     const id = 999999999;
     const rawMaterial = {
       value: '1h',
@@ -116,8 +116,8 @@ describe('Testing the work periods endpoints:', () => {
       });
   });
 
-  it('It should delete a work periods', (done) => {
-    const id = 1;
+  it('It should delete a work period', (done) => {
+    const id = 4;
     chai.request(SERVER_URL)
       .delete(`${ENDPOINT}/${id}`)
       .end((err, res) => {
@@ -127,7 +127,7 @@ describe('Testing the work periods endpoints:', () => {
       });
   });
 
-  it('It should delete a work periods with invalid id', (done) => {
+  it('It should delete a work period with invalid id', (done) => {
     const id = 999999999;
 
     chai.request(SERVER_URL)

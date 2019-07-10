@@ -124,7 +124,7 @@ describe('Testing the raw material endpoints:', () => {
   });
 
   it('It should delete a raw material', (done) => {
-    const id = 1;
+    const id = 3;
     chai.request(SERVER_URL)
       .delete(`${ENDPOINT}/${id}`)
       .end((err, res) => {
