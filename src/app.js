@@ -24,7 +24,7 @@ app.use(cors);
 app.use('/', routes);
 
 // DOCS
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(docs)));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(docs)));
 
 // NOT FOUND ERROR HANDLER
 app.use(errors.notFoundHandler);
