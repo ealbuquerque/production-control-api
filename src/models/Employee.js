@@ -7,22 +7,22 @@ import db from '../config/database';
 /**
  * @swagger
  * definitions:
- *  Employee:
- *    type: object
- *    required:
- *      - id
- *      - idWorkPeriod
- *      - name
- *    properties:
- *      id:
- *        description: Identificador único
- *        type: integer
- *      idWorkPeriod:
- *        description: Id do relacionamento com WorkPeriod
- *        type: integer
- *      name:
- *        description: Nome do funcionário
- *        type: string
+ *   Employee:
+ *     type: object
+ *     required:
+ *       - id
+ *       - idWorkPeriod
+ *       - name
+ *     properties:
+ *       id:
+ *         description: Identificador único
+ *         type: integer
+ *       idWorkPeriod:
+ *         description: Id do relacionamento com WorkPeriod
+ *         type: integer
+ *       name:
+ *         description: Nome do funcionário
+ *         type: string
  */
 const Employee = db.define('Employee', {
   id: {
