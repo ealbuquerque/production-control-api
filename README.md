@@ -8,7 +8,6 @@ O objetivo principal é disponibilizar webservices para administrar as operaçõ
 
 Api baseada em NodeJS e disponibilizada em Docker.
 
-
 ## Execução
 
 Para rodar este projeto você deve ter [NodeJS](https://nodejs.org/en/), [Yarn](https://yarnpkg.com/pt-BR/) e [git](https://git-scm.com/) instalados;
@@ -60,7 +59,7 @@ docker-compose -f docker-compose.db.yml down -v
 ```bash
 yarn install
 
-# or
+# ou
 
 npm install
 ```
@@ -72,7 +71,7 @@ Criação de base de dados, migrations, seeders...
 ```bash
 yarn db-init
 
-# or
+# ou
 
 npm run db-init
 ```
@@ -84,7 +83,7 @@ npm run db-init
 ```bash
 yarn start
 
-# or
+# ou
 
 npm run start
 ```
@@ -110,7 +109,7 @@ Para rodar os testes deve-se estar com a aplicação rodando e ai então rodar o
 ```bash
 yarn test
 
-# or
+# ou
 
 npm run test
 ```
