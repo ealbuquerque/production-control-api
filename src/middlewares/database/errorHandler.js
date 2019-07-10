@@ -12,7 +12,7 @@ export default (req, res) => (dbError) => {
   const error = {
     code: HttpStatus.INTERNAL_SERVER_ERROR,
     details: dbMessageErrorHandler(dbError),
-    message: 'Database error',
+    message: 'Erro de base de dados',
     messageToken: 'general.databaseError',
   };
 

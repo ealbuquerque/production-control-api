@@ -3,7 +3,9 @@ export default (error) => {
     case 'SequelizeForeignKeyConstraintError':
       return {
         error,
-        message: 'Não foi possível excluir este registro pois o mesmo possuí vínculos com outros registros.',
+        message: error.original.detail.indexOf('refencered') !== -1
+          ? 'Não foi possível excluir este registro pois o mesmo possuí vínculos com outras tabelas.'
+          : `Não foi possível encontrar o registro na tabela '${error.original.table}'.`,
       };
     default:
       return {
