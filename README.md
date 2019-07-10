@@ -8,7 +8,10 @@ O objetivo principal é disponibilizar webservices para administrar as operaçõ
 
 Api baseada em NodeJS e disponibilizada em Docker.
 
+
 ## Execução
+
+Para rodar este projeto você deve ter [NodeJS](https://nodejs.org/en/), [Yarn](https://yarnpkg.com/pt-BR/) e [git](https://git-scm.com/) instalados;
 
 ### 1º Passo - Clonar projeto
 
@@ -41,6 +44,8 @@ NODE_ENV='development'
 ### 3º Base de dados
 
 Caso não tenha o Postgres instalado na sua máquina, é possível utilizar o [docker](https://www.docker.com/) para para subir o serviço atráves deste [docker-compose](docker-compose.db.yml).
+
+Para rodar a base de dados via docker você deve ter o [docker](https://www.docker.com/) e o [docker-compose](https://docs.docker.com/compose/) instalados.
 
 ```
 # subir serviço
@@ -85,6 +90,8 @@ npm run start
 ```
 
 #### Docker
+
+Para rodar este projeto com o docker você deve ter o [docker](https://www.docker.com/) e o [docker-compose](https://docs.docker.com/compose/) instalados.
 
 Este [docker-compose](docker-compose.yml) vai gerar a imagem da api (caso não exista) e subir os serviços da base de dados na porta `5432` e da api na porta `5000`.
 
