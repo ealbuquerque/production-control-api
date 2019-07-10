@@ -22,7 +22,6 @@ module.exports = {
         model: 'raw_materials',
         key: 'id',
       },
-      onDelete: 'CASCADE',
       type: DataTypes.INTEGER,
     },
   }),
