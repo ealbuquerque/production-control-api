@@ -1,19 +1,18 @@
-import RawMaterial from '../models/RawMaterial';
+import WorkPeriod from '../models/WorkPeriod';
 
 const baseQuery = {
   attributes: [
     'id',
-    'name',
-    'quantity',
+    'value',
   ],
 };
 
 /**
  * @swagger
- * /raw-materials:
+ * /work-periods:
  *   get:
  *     tags:
- *      - /raw-materials
+ *      - /work-periods
  *     operationId: findAll
  *     summary: Lista todos os registros
  *     responses:
@@ -22,14 +21,14 @@ const baseQuery = {
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const findAll = () => RawMaterial.findAll(baseQuery);
+const findAll = () => WorkPeriod.findAll(baseQuery);
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /work-periods/{id}:
  *   get:
  *     tags:
- *      - /raw-materials
+ *      - /work-periods
  *     operationId: findById
  *     summary: Busca um registro pelo seu respectivo id
  *     parameters:
@@ -45,14 +44,14 @@ const findAll = () => RawMaterial.findAll(baseQuery);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const findById = id => RawMaterial.findByPk(id, baseQuery);
+const findById = id => WorkPeriod.findByPk(id, baseQuery);
 
 /**
  * @swagger
- * /raw-materials:
+ * /work-periods:
  *   post:
  *     tags:
- *      - /raw-materials
+ *      - /work-periods
  *     operationId: new
  *     summary: Cadastra um novo registro
  *     parameters:
@@ -61,16 +60,12 @@ const findById = id => RawMaterial.findByPk(id, baseQuery);
  *         schema:
  *           type: object
  *           properties:
- *             name:
+ *             value:
  *               type: string
- *             quantity:
- *               type: integer
  *           example:
- *             name: Novo produto
- *             quantity: 3
+ *             value: 1h
  *         required:
- *           - name
- *           - quantity
+ *           - value
  *     responses:
  *       201:
  *         description: Registro adicionado com sucesso
@@ -79,14 +74,14 @@ const findById = id => RawMaterial.findByPk(id, baseQuery);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const create = body => RawMaterial.create(body);
+const create = body => WorkPeriod.create(body);
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /work-periods/{id}:
  *   put:
  *     tags:
- *       - /raw-materials
+ *       - /work-periods
  *     operationId: edit
  *     summary: Atualiza um registro
  *     parameters:
@@ -99,16 +94,12 @@ const create = body => RawMaterial.create(body);
  *         schema:
  *           type: object
  *           properties:
- *             name:
+ *             value:
  *               type: string
- *             quantity:
- *               type: integer
  *           example:
- *             name: Produto alterado
- *             quantity: 3
+ *             value: 1h
  *         required:
- *           - name
- *           - quantity
+ *           - value
  *     responses:
  *       200:
  *         description: Registro alterado com sucesso
@@ -119,7 +110,7 @@ const create = body => RawMaterial.create(body);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const update = (id, body) => RawMaterial.update(
+const update = (id, body) => WorkPeriod.update(
   body,
   {
     where: {
@@ -130,10 +121,10 @@ const update = (id, body) => RawMaterial.update(
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /work-periods/{id}:
  *   delete:
  *     tags:
- *      - /raw-materials
+ *      - /work-periods
  *     operationId: destroy
  *     summary: Remove um registro pelo seu respectivo id
  *     parameters:
@@ -149,7 +140,7 @@ const update = (id, body) => RawMaterial.update(
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const destroy = id => RawMaterial.destroy({
+const destroy = id => WorkPeriod.destroy({
   where: {
     id,
   },

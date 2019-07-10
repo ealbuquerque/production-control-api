@@ -1,19 +1,29 @@
-import RawMaterial from '../models/RawMaterial';
+import Employee from '../models/Employee';
+import WorkPeriod from '../models/WorkPeriod';
 
 const baseQuery = {
   attributes: [
     'id',
     'name',
-    'quantity',
+  ],
+  include: [
+    {
+      as: 'workPeriod',
+      attributes: [
+        'id',
+        'value',
+      ],
+      model: WorkPeriod,
+    },
   ],
 };
 
 /**
  * @swagger
- * /raw-materials:
+ * /employees:
  *   get:
  *     tags:
- *      - /raw-materials
+ *      - /employees
  *     operationId: findAll
  *     summary: Lista todos os registros
  *     responses:
@@ -22,14 +32,14 @@ const baseQuery = {
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const findAll = () => RawMaterial.findAll(baseQuery);
+const findAll = () => Employee.findAll(baseQuery);
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /employees/{id}:
  *   get:
  *     tags:
- *      - /raw-materials
+ *      - /employees
  *     operationId: findById
  *     summary: Busca um registro pelo seu respectivo id
  *     parameters:
@@ -45,14 +55,14 @@ const findAll = () => RawMaterial.findAll(baseQuery);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const findById = id => RawMaterial.findByPk(id, baseQuery);
+const findById = id => Employee.findByPk(id, baseQuery);
 
 /**
  * @swagger
- * /raw-materials:
+ * /employees:
  *   post:
  *     tags:
- *      - /raw-materials
+ *      - /employees
  *     operationId: new
  *     summary: Cadastra um novo registro
  *     parameters:
@@ -61,16 +71,16 @@ const findById = id => RawMaterial.findByPk(id, baseQuery);
  *         schema:
  *           type: object
  *           properties:
+ *             idWorkPeriod:
+ *               type: integer
  *             name:
  *               type: string
- *             quantity:
- *               type: integer
  *           example:
- *             name: Novo produto
- *             quantity: 3
+ *             idWorkPeriod: 3
+ *             name: Ezequias A. Albuquerque
  *         required:
+ *           - idWorkPeriod
  *           - name
- *           - quantity
  *     responses:
  *       201:
  *         description: Registro adicionado com sucesso
@@ -79,14 +89,14 @@ const findById = id => RawMaterial.findByPk(id, baseQuery);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const create = body => RawMaterial.create(body);
+const create = body => Employee.create(body);
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /employees/{id}:
  *   put:
  *     tags:
- *       - /raw-materials
+ *       - /employees
  *     operationId: edit
  *     summary: Atualiza um registro
  *     parameters:
@@ -99,16 +109,16 @@ const create = body => RawMaterial.create(body);
  *         schema:
  *           type: object
  *           properties:
+ *             idWorkPeriod:
+ *               type: integer
  *             name:
  *               type: string
- *             quantity:
- *               type: integer
  *           example:
- *             name: Produto alterado
- *             quantity: 3
+ *             idWorkPeriod: 3
+ *             name: Ezequias Albuquerque
  *         required:
+ *           - idWorkPeriod
  *           - name
- *           - quantity
  *     responses:
  *       200:
  *         description: Registro alterado com sucesso
@@ -119,7 +129,7 @@ const create = body => RawMaterial.create(body);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const update = (id, body) => RawMaterial.update(
+const update = (id, body) => Employee.update(
   body,
   {
     where: {
@@ -130,10 +140,10 @@ const update = (id, body) => RawMaterial.update(
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /employees/{id}:
  *   delete:
  *     tags:
- *      - /raw-materials
+ *      - /employees
  *     operationId: destroy
  *     summary: Remove um registro pelo seu respectivo id
  *     parameters:
@@ -149,7 +159,7 @@ const update = (id, body) => RawMaterial.update(
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const destroy = id => RawMaterial.destroy({
+const destroy = id => Employee.destroy({
   where: {
     id,
   },

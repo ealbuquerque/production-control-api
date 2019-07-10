@@ -7,7 +7,8 @@ export default Joi
       .string()
       .max(100)
       .required(),
-    quantity: Joi
+    idWorkPeriod: Joi
       .number()
-      .integer(),
+      .integer()
+      .required(),
   });

@@ -1,19 +1,44 @@
+import Employee from '../models/Employee';
+import Product from '../models/Product';
+import ProductRawMaterial from '../models/ProductRawMaterial';
 import RawMaterial from '../models/RawMaterial';
 
 const baseQuery = {
   attributes: [
     'id',
     'name',
-    'quantity',
+  ],
+  include: [
+    {
+      as: 'employee',
+      attributes: [
+        'id',
+        'name',
+      ],
+      model: Employee,
+    },
+    {
+      as: 'rawMaterials',
+      attributes: [
+        'id',
+        'name',
+      ],
+      model: RawMaterial,
+      required: true,
+      through: {
+        attributes: [],
+        model: ProductRawMaterial,
+      },
+    },
   ],
 };
 
 /**
  * @swagger
- * /raw-materials:
+ * /products:
  *   get:
  *     tags:
- *      - /raw-materials
+ *      - /products
  *     operationId: findAll
  *     summary: Lista todos os registros
  *     responses:
@@ -22,14 +47,14 @@ const baseQuery = {
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const findAll = () => RawMaterial.findAll(baseQuery);
+const findAll = () => Product.findAll(baseQuery);
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /products/{id}:
  *   get:
  *     tags:
- *      - /raw-materials
+ *      - /products
  *     operationId: findById
  *     summary: Busca um registro pelo seu respectivo id
  *     parameters:
@@ -45,14 +70,14 @@ const findAll = () => RawMaterial.findAll(baseQuery);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const findById = id => RawMaterial.findByPk(id, baseQuery);
+const findById = id => Product.findByPk(id, baseQuery);
 
 /**
  * @swagger
- * /raw-materials:
+ * /products:
  *   post:
  *     tags:
- *      - /raw-materials
+ *      - /products
  *     operationId: new
  *     summary: Cadastra um novo registro
  *     parameters:
@@ -61,16 +86,21 @@ const findById = id => RawMaterial.findByPk(id, baseQuery);
  *         schema:
  *           type: object
  *           properties:
+ *             idEmployee:
+ *               type: integer
  *             name:
  *               type: string
- *             quantity:
- *               type: integer
+ *             rawMaterials:
+ *               type: array
+ *               items:
+ *                 type: integer
  *           example:
+ *             idEmployee: 2
  *             name: Novo produto
- *             quantity: 3
+ *             rawMaterials: [1,2]
  *         required:
+ *           - idEmployee
  *           - name
- *           - quantity
  *     responses:
  *       201:
  *         description: Registro adicionado com sucesso
@@ -79,14 +109,19 @@ const findById = id => RawMaterial.findByPk(id, baseQuery);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const create = body => RawMaterial.create(body);
+const create = ({
+  rawMaterials,
+  ...body
+}) => Product
+  .create(body)
+  .then(dbProduct => dbProduct.setRawMaterials(rawMaterials));
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /products/{id}:
  *   put:
  *     tags:
- *       - /raw-materials
+ *       - /products
  *     operationId: edit
  *     summary: Atualiza um registro
  *     parameters:
@@ -99,13 +134,18 @@ const create = body => RawMaterial.create(body);
  *         schema:
  *           type: object
  *           properties:
+ *             idEmployee:
+ *               type: integer
  *             name:
  *               type: string
- *             quantity:
- *               type: integer
+ *             rawMaterials:
+ *               type: array
+ *               items:
+ *                 type: integer
  *           example:
- *             name: Produto alterado
- *             quantity: 3
+ *             idEmployee: 1
+ *             name: Produto atualizado
+ *             rawMaterials: [1]
  *         required:
  *           - name
  *           - quantity
@@ -119,21 +159,37 @@ const create = body => RawMaterial.create(body);
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const update = (id, body) => RawMaterial.update(
-  body,
-  {
-    where: {
-      id,
+const update = (id, {
+  rawMaterials,
+  ...body
+}) => Product
+  .update(
+    body,
+    {
+      where: {
+        id,
+      },
     },
-  },
-);
+  )
+  .then(() => Product.findByPk(id))
+  .then((dbProduct) => {
+    if (dbProduct === null) {
+      return false;
+    }
+
+    return dbProduct.setRawMaterials(rawMaterials, {
+      through: {
+        started: false,
+      },
+    });
+  });
 
 /**
  * @swagger
- * /raw-materials/{id}:
+ * /products/{id}:
  *   delete:
  *     tags:
- *      - /raw-materials
+ *      - /products
  *     operationId: destroy
  *     summary: Remove um registro pelo seu respectivo id
  *     parameters:
@@ -149,7 +205,7 @@ const update = (id, body) => RawMaterial.update(
  *       500:
  *         description: Caso dê algum erro no servidor
  */
-const destroy = id => RawMaterial.destroy({
+const destroy = id => Product.destroy({
   where: {
     id,
   },

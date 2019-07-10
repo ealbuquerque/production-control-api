@@ -3,11 +3,8 @@ import Joi from 'joi';
 export default Joi
   .object()
   .keys({
-    name: Joi
+    value: Joi
       .string()
-      .max(100)
+      .max(2)
       .required(),
-    quantity: Joi
-      .number()
-      .integer(),
   });

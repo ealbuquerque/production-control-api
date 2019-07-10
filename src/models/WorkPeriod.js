@@ -5,40 +5,32 @@ import db from '../config/database';
 /**
  * @swagger
  * definitions:
- *  RawMaterial:
+ *  WorkPeriod:
  *    type: object
  *    required:
  *      - id
- *      - name
+ *      - value
  *    properties:
  *      id:
  *        description: Identificador único
  *        type: integer
- *      name:
- *        description: Nome da matéria-prima
- *        maxLength: 100
+ *      value:
+ *        description: Jornada de trabalho em horas
+ *        pattern: '^[1-9]h$'
  *        type: string
- *      quantity:
- *        description: Quantidade em estoque
- *        type: integer
  */
-export default db.define('RawMaterial', {
+export default db.define('WorkPeriod', {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: Sequelize.INTEGER,
   },
-  name: {
+  value: {
     allowNull: false,
-    type: Sequelize.STRING(100),
-  },
-  quantity: {
-    allowNull: false,
-    defaultValue: 0,
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING(2),
   },
 }, {
   freezeTableName: true,
-  tableName: 'raw_materials',
+  tableName: 'work_periods',
 });

@@ -1,0 +1,14 @@
+[
+  {
+    "id_product": 1,
+    "id_raw_material": 1
+  },
+  {
+    "id_product": 1,
+    "id_raw_material": 3
+  },
+  {
+    "id_product": 2,
+    "id_raw_material": 4
+  }
+]

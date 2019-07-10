@@ -5,7 +5,7 @@ import {
   schemaValidation,
 } from '../middlewares';
 
-import routes from './routes.json';
+import routes from './routes';
 
 const router = express.Router();
 
