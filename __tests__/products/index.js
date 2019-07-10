@@ -11,7 +11,7 @@ const {
 
 const ENDPOINT = '/products';
 
-describe('Testing the products endpoints:', () => {
+describe('Testing the /products endpoints:', () => {
   it('It should return all products', (done) => {
     request(SERVER_URL)
       .get(ENDPOINT)

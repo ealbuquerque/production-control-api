@@ -11,7 +11,7 @@ const {
 
 const ENDPOINT = '/raw-materials';
 
-describe('Testing the raw material endpoints:', () => {
+describe('Testing the /raw-material endpoints:', () => {
   it('It should return all raw materials', (done) => {
     request(SERVER_URL)
       .get(ENDPOINT)

@@ -11,7 +11,7 @@ const {
 
 const ENDPOINT = '/work-periods';
 
-describe('Testing the work periods endpoints:', () => {
+describe('Testing the /work-periods endpoints:', () => {
   it('It should return all work periodss', (done) => {
     request(SERVER_URL)
       .get(ENDPOINT)
