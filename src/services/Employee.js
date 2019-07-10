@@ -18,20 +18,14 @@ const baseQuery = {
   ],
 };
 
-const destroy = id => Employee.destroy({
-  where: {
-    id,
-  },
-});
-
 /**
  * @swagger
  * /employees:
  *   get:
  *     tags:
- *      - pet
+ *      - /employees
  *     operationId: findAll
- *     summary: Lista todos registros
+ *     summary: Lista todos os registros
  *     responses:
  *       200:
  *         description: Sucesso
@@ -45,8 +39,8 @@ const findAll = () => Employee.findAll(baseQuery);
  * /employees/{id}:
  *   get:
  *     tags:
- *      - pet
- *     operationId: findByPk
+ *      - /employees
+ *     operationId: findById
  *     summary: Busca um registro pelo seu respectivo id
  *     parameters:
  *       - in: path
@@ -56,6 +50,8 @@ const findAll = () => Employee.findAll(baseQuery);
  *     responses:
  *       200:
  *         description: Sucesso
+ *       404:
+ *         description: Registro não encontrado
  *       500:
  *         description: Caso dê algum erro no servidor
  */
@@ -66,7 +62,7 @@ const findById = id => Employee.findByPk(id, baseQuery);
  * /employees:
  *   post:
  *     tags:
- *      - pet
+ *      - /employees
  *     operationId: new
  *     summary: Cadastra um novo registro
  *     parameters:
@@ -100,13 +96,9 @@ const create = body => Employee.create(body);
  * /employees/{id}:
  *   put:
  *     tags:
- *       - pet
+ *       - /employees
  *     operationId: edit
  *     summary: Atualiza um registro
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
  *     parameters:
  *       - in: path
  *         name: id
@@ -130,6 +122,8 @@ const create = body => Employee.create(body);
  *     responses:
  *       200:
  *         description: Registro alterado com sucesso
+ *       404:
+ *         description: Registro não encontrado
  *       422:
  *         description: Caso exista algum erro na validação do schema
  *       500:
@@ -143,6 +137,33 @@ const update = (id, body) => Employee.update(
     },
   },
 );
+
+/**
+ * @swagger
+ * /employees/{id}:
+ *   delete:
+ *     tags:
+ *      - /employees
+ *     operationId: destroy
+ *     summary: Remove um registro pelo seu respectivo id
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: O id do registro
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Registro removido com sucesso
+ *       404:
+ *         description: Registro não encontrado
+ *       500:
+ *         description: Caso dê algum erro no servidor
+ */
+const destroy = id => Employee.destroy({
+  where: {
+    id,
+  },
+});
 
 export default {
   create,
