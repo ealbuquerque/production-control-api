@@ -5,6 +5,5 @@ export default Joi
   .keys({
     value: Joi
       .string()
-      .max(2)
       .required(),
   });

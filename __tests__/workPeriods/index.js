@@ -9,10 +9,10 @@ const {
   request,
 } = chai;
 
-const ENDPOINT = '/raw-materials';
+const ENDPOINT = '/work-periods';
 
-describe('Testing the raw material endpoints:', () => {
-  it('It should return all raw materials', (done) => {
+describe('Testing the work periods endpoints:', () => {
+  it('It should return all work periodss', (done) => {
     request(SERVER_URL)
       .get(ENDPOINT)
       .end((err, res) => {
@@ -24,15 +24,14 @@ describe('Testing the raw material endpoints:', () => {
         const [first] = res.body;
         if (first) {
           expect(first).to.have.property('id');
-          expect(first).to.have.property('name');
-          expect(first).to.have.property('quantity');
+          expect(first).to.have.property('value');
         }
 
         done();
       });
   });
 
-  it('It should return a raw material', (done) => {
+  it('It should return a work periods', (done) => {
     const id = 1;
     request(SERVER_URL)
       .get(`${ENDPOINT}/${id}`)
@@ -42,14 +41,13 @@ describe('Testing the raw material endpoints:', () => {
 
         expect(res.body).be.a('object');
         expect(res.body).to.have.property('id');
-        expect(res.body).to.have.property('name');
-        expect(res.body).to.have.property('quantity');
+        expect(res.body).to.have.property('value');
 
         done();
       });
   });
 
-  it('It should not get a raw material with invalid id', (done) => {
+  it('It should not get a work periods with invalid id', (done) => {
     const id = 999999999;
     chai.request(SERVER_URL)
       .get(`${ENDPOINT}/${id}`)
@@ -60,10 +58,9 @@ describe('Testing the raw material endpoints:', () => {
       });
   });
 
-  it('It should create a raw material', (done) => {
+  it('It should create a work periods', (done) => {
     const rawMaterial = {
-      name: 'Nova matéria-prima',
-      quantity: 10,
+      value: '1h',
     };
 
     chai.request(SERVER_URL)
@@ -76,10 +73,8 @@ describe('Testing the raw material endpoints:', () => {
       });
   });
 
-  it('It should not create a raw material with incomplete parameters', (done) => {
-    const rawMaterial = {
-      quantity: 1,
-    };
+  it('It should not create a work periods with incomplete parameters', (done) => {
+    const rawMaterial = {};
 
     chai.request(SERVER_URL)
       .post(ENDPOINT)
@@ -90,11 +85,10 @@ describe('Testing the raw material endpoints:', () => {
       });
   });
 
-  it('It should update a raw material', (done) => {
+  it('It should update a work periods', (done) => {
     const id = 1;
     const rawMaterial = {
-      name: 'Matéria-prima alterada',
-      quantity: 10,
+      value: '1h',
     };
 
     chai.request(SERVER_URL)
@@ -107,11 +101,10 @@ describe('Testing the raw material endpoints:', () => {
       });
   });
 
-  it('It should update a raw material with invalid id', (done) => {
+  it('It should update a work periods with invalid id', (done) => {
     const id = 999999999;
     const rawMaterial = {
-      name: 'Matéria-prima alterada',
-      quantity: 10,
+      value: '1h',
     };
 
     chai.request(SERVER_URL)
@@ -123,7 +116,7 @@ describe('Testing the raw material endpoints:', () => {
       });
   });
 
-  it('It should delete a raw material', (done) => {
+  it('It should delete a work periods', (done) => {
     const id = 1;
     chai.request(SERVER_URL)
       .delete(`${ENDPOINT}/${id}`)
@@ -134,7 +127,7 @@ describe('Testing the raw material endpoints:', () => {
       });
   });
 
-  it('It should delete a raw material with invalid id', (done) => {
+  it('It should delete a work periods with invalid id', (done) => {
     const id = 999999999;
 
     chai.request(SERVER_URL)
