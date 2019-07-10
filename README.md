@@ -44,9 +44,9 @@ Caso não tenha o Postgres instalado na sua máquina, é possível utilizar o [d
 
 ```
 # subir serviço
-docker-compose up -d
+docker-compose up -V -d
 
-# remover serviço
+# parar serviço
 docker-compose down -v
 ```
 
@@ -101,3 +101,7 @@ Está disponível no projeto um [arquivo de configuração](Insomnia_2019-07-10.
 ## Documentação
 
 Com a aplicação rodando, [acesse aqui](http://localhost:5000/docs).
+
+## Issues para resolver
+
+[Acesse aqui](https://github.com/ealbuquerque/production-control-api/issues)

@@ -173,9 +173,7 @@ const update = (id, {
   )
   .then(() => Product.findByPk(id))
   .then((dbProduct) => {
-    if (dbProduct === null) {
-      return false;
-    }
+    if (dbProduct === null) return false;
 
     return dbProduct.setRawMaterials(rawMaterials, {
       through: {
