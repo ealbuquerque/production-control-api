@@ -5,26 +5,6 @@ import RawMaterial from './RawMaterial';
 
 import db from '../config/database';
 
-/**
- * @swagger
- * definitions:
- *  ProductRawMaterial:
- *    type: object
- *    required:
- *      - id
- *      - id_product
- *      - id_raw_material
- *    properties:
- *      id:
- *        description: Identificador único
- *        type: integer
- *      id_product:
- *        description: Id do relacionamento com Product
- *        type: integer
- *      id_raw_material:
- *        description: Id do relacionamento com RawMaterial
- *        type: integer
- */
 const ProductRawMaterial = db.define('ProductRawMaterial', {
   id: {
     allowNull: false,
