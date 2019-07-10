@@ -1,36 +1,146 @@
 const {
   chai,
-  ENDPOINT,
   HttpStatus,
   SERVER_URL,
 } = require('../config');
 
-/* eslint-disable-next-line no-undef */
-describe('RawMaterials', () => {
-  /* eslint-disable-next-line no-undef */
-  it(`GET ${ENDPOINT} 200 - Should return a list`, (done) => {
-    chai
-      .request(SERVER_URL)
+const {
+  expect,
+  request,
+} = chai;
+
+const ENDPOINT = '/raw-materials';
+
+describe('Testing the raw material endpoints:', () => {
+  it('It should return all raw materials', (done) => {
+    request(SERVER_URL)
       .get(ENDPOINT)
       .end((err, res) => {
-        chai.expect(res).to.have.status(HttpStatus.OK);
-        chai.expect(err).to.equal(null);
-        chai.expect(res.body).be.a('array');
+        expect(res).to.have.status(HttpStatus.OK);
+        expect(err).to.equal(null);
+
+        expect(res.body).be.a('array');
+
+        const [first] = res.body;
+        if (first) {
+          expect(first).to.have.property('id');
+          expect(first).to.have.property('name');
+          expect(first).to.have.property('quantity');
+        }
 
         done();
       });
   });
 
-  /* eslint-disable-next-line no-undef */
-  it(`GET ${ENDPOINT} 200 - Should return a object`, (done) => {
-    chai
-      .request(SERVER_URL)
-      .get(`${ENDPOINT}/1`)
+  it('It should return a raw material', (done) => {
+    const id = 1;
+    request(SERVER_URL)
+      .get(`${ENDPOINT}/${id}`)
       .end((err, res) => {
-        chai.expect(res).to.have.status(HttpStatus.OK);
-        chai.expect(err).to.equal(null);
-        chai.expect(res.body).be.a('object');
+        expect(res).to.have.status(HttpStatus.OK);
+        expect(err).to.equal(null);
 
+        expect(res.body).be.a('object');
+        expect(res.body).to.have.property('id');
+        expect(res.body).to.have.property('name');
+        expect(res.body).to.have.property('quantity');
+
+        done();
+      });
+  });
+
+  it('It should not get a raw material with invalid id', (done) => {
+    const id = 999999999;
+    chai.request(SERVER_URL)
+      .get(`${ENDPOINT}/${id}`)
+      .end((err, res) => {
+        expect(res.status).to.equal(HttpStatus.NOT_FOUND);
+        expect(res.body.message).to.equal('Registro não encontrado');
+        done();
+      });
+  });
+
+  it('It should create a raw material', (done) => {
+    const rawMaterial = {
+      name: 'Nova matéria-prima',
+      quantity: 10,
+    };
+
+    chai.request(SERVER_URL)
+      .post(ENDPOINT)
+      .send(rawMaterial)
+      .end((err, res) => {
+        expect(res.status).to.equal(HttpStatus.CREATED);
+        expect(res.body.data).to.include({});
+        done();
+      });
+  });
+
+  it('It should not create a raw material with incomplete parameters', (done) => {
+    const rawMaterial = {
+      quantity: 10,
+    };
+
+    chai.request(SERVER_URL)
+      .post(ENDPOINT)
+      .send(rawMaterial)
+      .end((err, res) => {
+        expect(res.status).to.equal(HttpStatus.UNPROCESSABLE_ENTITY);
+        done();
+      });
+  });
+
+  it('It should update a raw material', (done) => {
+    const id = 1;
+    const rawMaterial = {
+      name: 'Matéria-prima alterada',
+      quantity: 10,
+    };
+
+    chai.request(SERVER_URL)
+      .put(`${ENDPOINT}/${id}`)
+      .send(rawMaterial)
+      .end((err, res) => {
+        expect(res.status).to.equal(HttpStatus.OK);
+        expect(res.body.data).to.include({});
+        done();
+      });
+  });
+
+  it('It should update a raw material with invalid id', (done) => {
+    const id = 999999999;
+    const rawMaterial = {
+      name: 'Matéria-prima alterada',
+      quantity: 10,
+    };
+
+    chai.request(SERVER_URL)
+      .put(`${ENDPOINT}/${id}`)
+      .send(rawMaterial)
+      .end((err, res) => {
+        expect(res.status).to.equal(HttpStatus.NOT_FOUND);
+        done();
+      });
+  });
+
+  it('It should delete a raw material', (done) => {
+    const id = 1;
+    chai.request(SERVER_URL)
+      .delete(`${ENDPOINT}/${id}`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.data).to.include({});
+        done();
+      });
+  });
+
+  it('It should delete a raw material with invalid id', (done) => {
+    const id = 999999999;
+
+    chai.request(SERVER_URL)
+      .delete(`${ENDPOINT}/${id}`)
+      .end((err, res) => {
+        expect(res.status).to.equal(HttpStatus.NOT_FOUND);
         done();
       });
   });
