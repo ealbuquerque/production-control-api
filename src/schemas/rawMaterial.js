@@ -9,6 +9,5 @@ export default Joi
       .required(),
     quantity: Joi
       .number()
-      .integer()
-      .required(),
+      .integer(),
   });

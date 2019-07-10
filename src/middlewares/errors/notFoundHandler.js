@@ -13,7 +13,7 @@ export default (req, res) => {
   const code = HttpStatus.NOT_FOUND;
   const error = {
     code,
-    message: HttpStatus.getStatusText(code),
+    message: 'Registro não encontrado',
     messageToken: 'general.notFound',
   };
 

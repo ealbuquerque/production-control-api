@@ -2,6 +2,26 @@ import Sequelize from 'sequelize';
 
 import db from '../config/database';
 
+/**
+ * @swagger
+ * definitions:
+ *  RawMaterial:
+ *    type: object
+ *    required:
+ *      - id
+ *      - name
+ *    properties:
+ *      id:
+ *        description: Identificador único
+ *        type: integer
+ *      name:
+ *        description: Nome da matéria-prima
+ *        maxLength: 100
+ *        type: string
+ *      quantity:
+ *        description: Quantidade em estoque
+ *        type: integer
+ */
 export default db.define('RawMaterial', {
   id: {
     allowNull: false,
@@ -15,6 +35,7 @@ export default db.define('RawMaterial', {
   },
   quantity: {
     allowNull: false,
+    defaultValue: 0,
     type: Sequelize.INTEGER,
   },
 }, {
