@@ -11,8 +11,10 @@ Api baseada em NodeJS e disponibilizada em Docker.
 ## Execução
 
 ### 1º Passo - Clonar projeto
-    1. Abra o terminal, e acesse um  diretório de sua preferência
-    1. Clone o projeto com o comando abaixo:
+
+1. Abra o terminal e acesse um  diretório de sua preferência.
+2. Clone o projeto com o comando abaixo:
+
 ```
 git clone https://github.com/ealbuquerque/production-control-api.git
 ```
