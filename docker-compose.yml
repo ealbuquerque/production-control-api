@@ -2,7 +2,7 @@ version: '3'
 
 services:
   database:
-    image: postgres
+    image: postgres:11.4-alpine
     restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres
@@ -12,10 +12,10 @@ services:
     volumes:
       - datavolume:/var/lib/postgresql/data
     networks:
-      - production-control-network
-      
+      - production-control-db-network
+
 networks: 
-  production-control-network:
+  production-control-db-network:
     driver: bridge
 
 volumes:

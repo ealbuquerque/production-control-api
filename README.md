@@ -43,7 +43,11 @@ NODE_ENV='development'
 Caso não tenha o Postgres instalado na sua máquina, é possível utilizar o [docker](https://www.docker.com/) para para subir o serviço atráves deste [docker-compose](docker-compose.yml).
 
 ```
+# subir serviço
 docker-compose up -d
+
+# remover serviço
+docker-compose down -v
 ```
 
 ### 4º Passo - Baixar dependências
