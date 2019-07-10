@@ -93,7 +93,7 @@ npm run start
 
 Para rodar este projeto com o docker você deve ter o [docker](https://www.docker.com/) e o [docker-compose](https://docs.docker.com/compose/) instalados.
 
-Este [docker-compose](docker-compose.yml) vai gerar a imagem da api (caso não exista) e subir os serviços da base de dados na porta `5432` e da api na porta `5000`.
+Este [docker-compose](docker-compose.yml) vai gerar a imagem da api (caso não exista) e subir os serviços da **base de dados** na porta `5432` e da **api** na porta `5000`.
 
 ```
 # subir serviço
