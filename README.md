@@ -10,6 +10,8 @@ Api baseada em NodeJS e disponibilizada em Docker.
 
 ## Execução
 
+Para rodar este projeto você deve ter [NodeJS](https://nodejs.org/en/), [Yarn](https://yarnpkg.com/pt-BR/) e [git](https://git-scm.com/) instalados;
+
 ### 1º Passo - Clonar projeto
 
 1. Abra o terminal e acesse um  diretório de sua preferência.
@@ -42,6 +44,8 @@ NODE_ENV='development'
 
 Caso não tenha o Postgres instalado na sua máquina, é possível utilizar o [docker](https://www.docker.com/) para para subir o serviço atráves deste [docker-compose](docker-compose.db.yml).
 
+Para rodar a base de dados via docker você deve ter o [docker](https://www.docker.com/) e o [docker-compose](https://docs.docker.com/compose/) instalados.
+
 ```
 # subir serviço
 docker-compose -f docker-compose.db.yml up -V -d
@@ -55,7 +59,7 @@ docker-compose -f docker-compose.db.yml down -v
 ```bash
 yarn install
 
-# or
+# ou
 
 npm install
 ```
@@ -67,7 +71,7 @@ Criação de base de dados, migrations, seeders...
 ```bash
 yarn db-init
 
-# or
+# ou
 
 npm run db-init
 ```
@@ -79,14 +83,16 @@ npm run db-init
 ```bash
 yarn start
 
-# or
+# ou
 
 npm run start
 ```
 
 #### Docker
 
-Este [docker-compose](docker-compose.yml) vai gerar a imagem da api (caso não exista) e subir os serviços da base de dados na porta `5432` e da api na porta `5000`.
+Para rodar este projeto com o docker você deve ter o [docker](https://www.docker.com/) e o [docker-compose](https://docs.docker.com/compose/) instalados.
+
+Este [docker-compose](docker-compose.yml) vai gerar a imagem da api (caso não exista) e subir os serviços da **base de dados** na porta `5432` e da **api** na porta `5000`.
 
 ```
 # subir serviço
@@ -103,7 +109,7 @@ Para rodar os testes deve-se estar com a aplicação rodando e ai então rodar o
 ```bash
 yarn test
 
-# or
+# ou
 
 npm run test
 ```
