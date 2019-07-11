@@ -44,8 +44,8 @@ export default (req, res, next) => {
             })),
             original: err,
           },
-          message: 'Validation Failed',
-          messageToken: 'general.validationFailed',
+          message: 'Erro ao validar esquema do objeto',
+          messageToken: 'general:errors.schemaValidation',
         });
     }
   });

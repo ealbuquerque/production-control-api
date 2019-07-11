@@ -14,7 +14,7 @@ export default (req, res) => {
   const error = {
     code,
     message: 'Registro não encontrado',
-    messageToken: 'general.notFound',
+    messageToken: 'general:errors.notFound',
   };
 
   genericErrorHandler(error, req, res);
