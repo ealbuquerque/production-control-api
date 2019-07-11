@@ -12,8 +12,8 @@ export default (req, res) => (dbError) => {
   const error = {
     code: HttpStatus.INTERNAL_SERVER_ERROR,
     details: dbMessageErrorHandler(dbError),
-    message: 'Erro de base de dados',
-    messageToken: 'general.databaseError',
+    message: 'Erro de base de dados. Por favor, contate o administrador do sistema.',
+    messageToken: 'general:errors.databaseError',
   };
 
   genericErrorHandler(error, req, res);
