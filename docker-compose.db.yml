@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:11.4-alpine
+    container_name: production-control_database
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Abc_1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - datavolume:/var/lib/postgresql/data
+    networks:
+      - production-control-network
+  
+networks: 
+  production-control-network:
+
+volumes:
+  datavolume:
