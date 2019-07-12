@@ -14,6 +14,6 @@ echo "NODE_ENV=${NODE_ENV}" >> .env
 
 cat .env
 
-yarn db-init
+npm run db-init
 
 exec "$@"

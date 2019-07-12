@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "scripts": {
     "db-init": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
-    "db-reset": "sequelize db:drop && yarn db-init",
+    "db-reset": "sequelize db:drop && npm run db-init",
+    "docker-db-start": "docker-compose -f docker-compose.db.yml up -V -d && npm run db-init",
+    "docker-db-stop": "docker-compose -f docker-compose.db.yml down -v",
     "lint": "eslint .",
     "lint-fix": "eslint ./src --fix",
     "migrate": "sequelize db:migrate",
